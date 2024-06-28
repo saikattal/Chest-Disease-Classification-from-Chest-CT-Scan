@@ -5,6 +5,7 @@ import tensorflow as tf
 import time
 from cnnClassifier.entity.config_entity import TrainingConfig
 from pathlib import Path
+import shutil
 
 class Training:
     def __init__(self, config: TrainingConfig):
@@ -83,4 +84,10 @@ class Training:
         self.save_model(
             path=self.config.trained_model_path,
             model=self.model
+        
+
         )
+
+        """source='/Users/skt/Documents/MLOPS Projects/Chest-Disease-Classification-from-Chest-CT-Scan/artifacts/training/model.h5'
+        destination='/Users/skt/Documents/MLOPS Projects/Chest-Disease-Classification-from-Chest-CT-Scan/model/model.h5'
+        shutil.copy(source, destination)"""
