@@ -64,7 +64,7 @@ class Evaluation:
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         
         with mlflow.start_run():
-            mlflow.log_param(self.config.all_params)
+            mlflow.log_params(self.config.all_params)
             mlflow.log_metrics(
                 {"loss": self.score[0], "accuracy": self.score[1]}
             )
