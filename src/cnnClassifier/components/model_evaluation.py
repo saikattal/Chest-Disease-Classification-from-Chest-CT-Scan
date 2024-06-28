@@ -59,16 +59,20 @@ class Evaluation:
         
         dagshub.init(repo_owner='saikattal', repo_name='Chest-Disease-Classification-from-Chest-CT-Scan', mlflow=True)
 
-
-        mlflow.set_registry_uri(self.config.mlflow_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        mlflow.set_registry_uri(self.config.mlflow_uri)
+        
         
         with mlflow.start_run():
             mlflow.log_params(self.config.all_params)
             mlflow.log_metrics(
                 {"loss": self.score[0], "accuracy": self.score[1]}
             )
+
+            remote_server_uri = self.config.mlflow_uri
+            mlflow.set_tracking_uri(remote_server_uri)
             # Model registry does not work with file store
+            
             if tracking_url_type_store != "file":
 
                 # Register the model
